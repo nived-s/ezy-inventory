@@ -1,0 +1,439 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Dashboard {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <!-- Header -->
+    <div class="header bg-primary pb-6">
+      <div class="container-fluid">
+        <div class="header-body">
+          <!-- Card stats -->
+          <div class="row">
+            <div class="col-xl-3 col-md-6">
+              <div class="card card-stats">
+                <!-- Card body -->
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      <h5 class="card-title text-uppercase text-muted mb-0">Product Sold</h5>
+                      <span class="h2 font-weight-bold mb-0">350,897</span>
+                    </div>
+                    <div class="col-auto">
+                      <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
+                        <i class="ni ni-active-40"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="mt-3 mb-0 text-sm">
+                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
+                    <span class="text-nowrap">Since last month</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+              <div class="card card-stats">
+                <!-- Card body -->
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      <h5 class="card-title text-uppercase text-muted mb-0">Net Profit</h5>
+                      <span class="h2 font-weight-bold mb-0">2,356</span>
+                    </div>
+                    <div class="col-auto">
+                      <div class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
+                        <i class="ni ni-chart-pie-35"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="mt-3 mb-0 text-sm">
+                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
+                    <span class="text-nowrap">Since last month</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+              <div class="card card-stats">
+                <!-- Card body -->
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      <h5 class="card-title text-uppercase text-muted mb-0">Expenditure</h5>
+                      <span class="h2 font-weight-bold mb-0">924</span>
+                    </div>
+                    <div class="col-auto">
+                      <div class="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
+                        <i class="ni ni-money-coins"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="mt-3 mb-0 text-sm">
+                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
+                    <span class="text-nowrap">Since last month</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+              <div class="card card-stats">
+                <!-- Card body -->
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      <h5 class="card-title text-uppercase text-muted mb-0">Yearly Profit</h5>
+                      <span class="h2 font-weight-bold mb-0">49,65%</span>
+                    </div>
+                    <div class="col-auto">
+                      <div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
+                        <i class="ni ni-chart-bar-32"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="mt-3 mb-0 text-sm">
+                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
+                    <span class="text-nowrap">Since last month</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Page content -->
+    <div class="container-fluid mt--6">
+      <div class="row">
+        <div class="col-xl-8">
+          <div class="card bg-default">
+            <div class="card-header bg-transparent">
+              <div class="row align-items-center">
+                <div class="col">
+                  <h6 class="text-light text-uppercase ls-1 mb-1">Overview</h6>
+                  <h5 class="h3 text-white mb-0">Sales value</h5>
+                </div>
+                <div class="col">
+                  <ul class="nav nav-pills justify-content-end">
+                    <li class="nav-item mr-2 mr-md-0" data-toggle="chart" data-target="#chart-sales-dark" data-update='{"data":{"datasets":[{"data":[0, 20, 10, 30, 15, 40, 20, 60, 60]}]}}' data-prefix="$" data-suffix="k">
+                      <a href="#" class="nav-link py-2 px-3 active" data-toggle="tab">
+                        <span class="d-none d-md-block">Month</span>
+                        <span class="d-md-none">M</span>
+                      </a>
+                    </li>
+                    <!-- <li class="nav-item" data-toggle="chart" data-target="#chart-sales-dark" data-update='{"data":{"datasets":[{"data":[0, 20, 5, 25, 10, 30, 15, 40, 40]}]}}' data-prefix="$" data-suffix="k"> -->
+                    <li class="nav-item" data-toggle="chart" data-target="#chart-sales-dark" data-update='{"data":{"datasets":[{"data":[{% for order in total_orders %}{{ order.value }},{% endfor %}]}]}}' data-prefix="$" data-suffix="k">
+                      <a href="#" class="nav-link py-2 px-3" data-toggle="tab">
+                        <span class="d-none d-md-block">Week</span>
+                        <span class="d-md-none">W</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <!-- Chart -->
+              <div class="chart">
+                <!-- Chart wrapper -->
+                <!-- <canvas id="chart-sales-dark" class="chart-canvas"></canvas> -->
+  <!-- Your Django template code to generate values for SalesValue -->
+<div id="sales-data" data-labels="{% for sales_value in sales_values %}{{ sales_value.month }}|{% endfor %}" data-values="{% for sales_value in sales_values %}{{ sales_value.value }}|{% endfor %}"></div>
+
+<!-- Include Chart.js library -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- Chart.js script for SalesValue -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    // Extracted values from the 'sales-data' div
+    var labelsDataSales = document.getElementById('sales-data').dataset.labels;
+    var valuesDataSales = document.getElementById('sales-data').dataset.values;
+
+    // Parse the values into arrays
+    var labelsSales = labelsDataSales.split('|').filter(Boolean);
+    var dataValuesSales = valuesDataSales.split('|').filter(Boolean).map(Number);
+
+    // Create line chart for SalesValue
+    var ctxSales = document.getElementById('sales-chart').getContext('2d');
+    var salesChart = new Chart(ctxSales, {
+        type: 'line',
+        data: {
+            labels: labelsSales,
+            datasets: [{
+                label: 'Sales Value',
+                data: dataValuesSales,
+                fill: false,
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 2
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+});
+</script>
+
+<!-- Chart container for SalesValue -->
+
+    <canvas id="sales-chart"></canvas>
+
+
+                
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-4">
+          <div class="card">
+            <div class="card-header bg-transparent">
+              <div class="row align-items-center">
+                <div class="col">
+                  <h6 class="text-uppercase text-muted ls-1 mb-1">Performance</h6>
+                  <h5 class="h3 mb-0">Total orders</h5>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <!-- Chart -->
+              <div class="chart">
+                <!-- <canvas id="chart-bars" class="chart-canvas"></canvas> -->
+                <!-- Your Django template code to generate values -->
+                <div id="chart-data" data-labels="{% for total_order in total_orders %}{{ total_order.month }}|{% endfor %}" data-values="{% for total_order in total_orders %}{{ total_order.value }}|{% endfor %}"></div>
+
+                <!-- Include Chart.js library -->
+                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+                <!-- Chart.js script -->
+                <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    // Extracted values from the 'chart-data' div
+                    var labelsData = document.getElementById('chart-data').dataset.labels;
+                    var valuesData = document.getElementById('chart-data').dataset.values;
+
+                    // Parse the values into arrays
+                    var labels = labelsData.split('|').filter(Boolean);
+                    var dataValues = valuesData.split('|').filter(Boolean).map(Number);
+
+                    // Create chart
+                    var ctx = document.getElementById('myChart').getContext('2d');
+                    var myChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: labels,
+                            datasets: [{
+                                label: 'Total Orders',
+                                data: dataValues,
+                                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                borderColor: 'rgba(75, 192, 192, 1)',
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
+                });
+                </script>
+
+                <!-- Chart container -->
+                <canvas id="myChart" class="chart-canvas"></canvas>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-8">
+          <div class="card">
+            <div class="card-header border-0">
+              <div class="row align-items-center">
+                <div class="col">
+                  <h3 class="mb-0">Purchase List</h3>
+                </div>
+                <div class="col text-right">
+                  <a href="#!" class="btn btn-sm btn-primary">See all</a>
+                </div>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <!-- Projects table -->
+              <table class="table align-items-center table-flush">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">Item name</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for purchase in purchase_list %}
+                    <tr>
+                        <td>{{ purchase.item }}</td>
+                        <td>{{ purchase.date }}</td>
+                        <td>{{ purchase.quantity }}</td>
+                        <td>{{ purchase.price }}</td>
+                    </tr>
+                  {% endfor %}
+                  
+                 
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-4">
+          <div class="card">
+            <div class="card-header border-0">
+              <div class="row align-items-center">
+                <div class="col">
+                  <h3 class="mb-0">Sold Products</h3>
+                </div>
+                <div class="col text-right">
+                  <a href="#!" class="btn btn-sm btn-primary">See all</a>
+                </div>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <!-- Projects table -->
+              <table class="table align-items-center table-flush">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">Referral</th>
+                    <th scope="col">Visitors</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for product in sold_products %}
+                    <tr>
+                        <td>{{ product.product }}</td>
+                        <td>{{ product.price }}</td>
+                        
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      
+      </div>
+      
+      <div class="row">
+        <div class="col-xl-6">
+          <div class="card">
+            <div class="card-header border-0">
+              <div class="row align-items-center">
+                <div class="col">
+                  <h3 class="mb-0">Logistics</h3>
+                  <h6 class="ls-1 mb-1">Shows the most apt shipment mode.</h6>
+                </div>
+                
+              </div>
+            </div>
+            {% comment %} image code here  {% endcomment %}
+            <img alt="Image placeholder"  height='435' src="/static/assets/img/graphs/logi.jpg">
+
+          </div>
+        </div>
+        {% comment %} 2nd colum  {% endcomment %}
+        <div class="col-xl-6">
+          <div class="card">
+            <div class="card-header border-0">
+              <div class="row align-items-center">
+                <div class="col">
+                  <h3 class="mb-0">Inventory </h3>
+                  <h6 class="ls-1 mb-1">Inventory management of purchased materials. </h6>
+                </div>
+                
+              </div>
+            </div>
+            {% comment %} image code here  {% endcomment %}
+            <img alt="Image placeholder" src="/static/assets/img/graphs/invn.jpg">
+          </div>
+        </div>
+      
+      </div>
+      <div class="row">
+        <div class="col-xl-6">
+          <div class="card">
+            <div class="card-header border-0">
+              <div class="row align-items-center">
+                <div class="col">
+                  <h3 class="mb-0">Demand Forcasting</h3>
+                  <h6 class="ls-1 mb-1">Predicting sales for next 30 days.</h6>
+                </div>
+                
+              </div>
+            </div>
+            {% comment %} image code here  {% endcomment %}
+            <img alt="Image placeholder"  height='470' src="/static/assets/img/graphs/demandfor.jpg">
+
+          </div>
+        </div>
+        {% comment %} 2nd colum  {% endcomment %}
+        <div class="col-xl-6">
+          <div class="card">
+            <div class="card-header border-0">
+              <div class="row align-items-center">
+                <div class="col">
+                  <h3 class="mb-0">Suppliers analysis</h3>
+                  <h6 class="ls-1 mb-1">Chart of suppliers of raw materials.</h6>
+
+                </div>
+                
+              </div>
+            </div>
+            {% comment %} image code here  {% endcomment %}
+            <img alt="Image placeholder" src="/static/assets/img/graphs/suppliers_analy.jpg">
+          </div>
+        </div>
+      
+      </div>
+      
+        <div class="card">
+          <div class="card-header border-0">
+            <div class="row align-items-center">
+              <div class="col text-center">
+                <h3 class="mb-0">©Team PING</h3>
+                
+              </div>
+              
+            </div>
+          </div>
+      </div> 
+
+        
+      </div>
+    </div>
+  </div>
+  
+  </div>
+
+
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE --> 
+{% block javascripts %}
+
+  <script src="/static/assets/vendor/chart.js/dist/Chart.min.js"></script>
+  <script src="/static/assets/vendor/chart.js/dist/Chart.extension.js"></script>
+
+{% endblock javascripts %}
